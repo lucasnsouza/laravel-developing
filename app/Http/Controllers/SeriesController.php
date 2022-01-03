@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Serie;
 use App\Http\Requests\SeriesFormRequest;
+use App\Mail\NovaSerie;
 use App\Models\Episodio;
 use App\Models\Temporada;
+use App\Models\User;
 use App\Services\CriadorDeSerie;
 use App\Services\RemovedorDeSerie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SeriesController extends Controller 
 {
@@ -50,6 +53,25 @@ class SeriesController extends Controller
             $request->qtd_temporadas, 
             $request->qtd_episodios
         );
+
+        //pegando todos os usuarios cadastrados
+        $users = User::all();
+
+        foreach($users as $user) {
+            //passando infromações do corpo do email
+            $email = new NovaSerie(
+                $request->nome,
+                $request->qtd_temporadas,
+                $request->qtd_episodios
+            );
+
+            $email->subject('Nova série adicionada!');
+            //disparo do email pra cada usuário 
+            Mail::to($user)->send($email);
+            //define um intervalo de tempo para o envio de cada email
+            //aqui serão 3s
+            sleep(3);
+        }
 
         //acessar métodos de sessão
         //usar flash para métodos que vão durar apenas uma requisção

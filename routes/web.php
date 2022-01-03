@@ -8,6 +8,7 @@ use App\Http\Controllers\TemporadasController;
 use App\Mail\NovaSerie;
 use App\Serie;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -79,6 +80,25 @@ Route::get('/visualizando-email', function() {
         2,
         16
     );
+});
+
+//rota para email
+Route::get('/enviando-email', function() {
+    $email = new NovaSerie(
+        'The Mandalorian',
+        2,
+        16
+    );
+
+    $user = (object)[
+        'email' => 'lucas@teste.com',
+        'name' => 'Lucas'
+    ];
+    
+    
+    Mail::to($user)->send($email);
+
+    return 'Email enviado';
 });
 
 require __DIR__.'/auth.php';
