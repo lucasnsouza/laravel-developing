@@ -5,6 +5,7 @@ use App\Http\Controllers\EpisodiosController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\SeriesController;
 use App\Http\Controllers\TemporadasController;
+use App\Mail\NovaSerie;
 use App\Serie;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -69,6 +70,15 @@ Route::post('/registrar', [RegistroController::class, 'store']);
 Route::get('/sair', function() {
     Auth::logout();
     return redirect()->route('form_login');
+});
+
+//rota para email
+Route::get('/visualizando-email', function() {
+    return new NovaSerie(
+        'The Mandalorian',
+        2,
+        16
+    );
 });
 
 require __DIR__.'/auth.php';
