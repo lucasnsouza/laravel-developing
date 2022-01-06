@@ -34,6 +34,12 @@ class NovaSerie extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.serie.nova-serie');
+        return $this->markdown('mail.serie.nova-serie')
+            ->subject('Nova série adicionada!')
+            ->with([
+                'nome' => $this->nome,
+                'qtdTemporadas' => $this->qtdTemporadas,
+                'qtdEpisodios' => $this->qtdEpisodios
+            ]);
     }
 }

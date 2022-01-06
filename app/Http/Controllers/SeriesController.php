@@ -57,7 +57,9 @@ class SeriesController extends Controller
         //pegando todos os usuarios cadastrados
         $users = User::all();
 
-        foreach($users as $user) {
+        foreach($users as $indice => $user) {
+
+            $multiplicador = $indice + 1;
             //passando infromações do corpo do email
             $email = new NovaSerie(
                 $request->nome,
@@ -66,11 +68,13 @@ class SeriesController extends Controller
             );
 
             $email->subject('Nova série adicionada!');
-            //disparo do email pra cada usuário 
-            Mail::to($user)->send($email);
+            //tempo para envio dos emails
+            $tempoDeDelay = now()->addSecond($multiplicador * 5);
+            //disparo do email pra cada usuário, através de fila 
+            Mail::to($user)->later($tempoDeDelay, $email);
             //define um intervalo de tempo para o envio de cada email
             //aqui serão 3s
-            sleep(3);
+            //sleep(3);
         }
 
         //acessar métodos de sessão
