@@ -49,11 +49,20 @@ class SeriesController extends Controller
     //método para salvar no banco
     public function store(SeriesFormRequest $request, CriadorDeSerie $criadorDeSerie)
     {
+        //iniciamos capa como sendo null
+        $capa = null;
+        //verificar se o campo capa vem com um arquivo
+        if($request->hasFile('capaDaSerie')){
+            //se tiver, fazemos o upload do arquivo
+            //e atribuímos a variável capa
+            $capa = $request->file('capaDaSerie')->store('public/serie');
+        }
+
         $serie = $criadorDeSerie->criarSerie(
             $request->nome, 
             $request->qtd_temporadas, 
             $request->qtd_episodios,
-            $request->capaDaSerie
+            $capa
         );
         
         //criando evento
