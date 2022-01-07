@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
 
-class LogNovaSerieCadastrada
+class LogNovaSerieCadastrada implements ShouldQueue
 {
     /**
      * Create the event listener.
