@@ -52,9 +52,10 @@ class SeriesController extends Controller
         $serie = $criadorDeSerie->criarSerie(
             $request->nome, 
             $request->qtd_temporadas, 
-            $request->qtd_episodios
+            $request->qtd_episodios,
+            $request->capaDaSerie
         );
-
+        
         //criando evento
         $eventoNovaSerie = new EventsNovaSerie(
             $request->nome, 

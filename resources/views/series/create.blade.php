@@ -1,11 +1,11 @@
 @extends('layout')
 
 @section('titulo')
-    Adicionar filme
+    Adicionar série
 @endsection
 
 @section('cabecalho')
-    Novo filme
+    Nova série
 @endsection
 
 @section('conteudo')
@@ -28,6 +28,13 @@
                 <div class="col col-md-2">
                     <label for="qtd_episodios" class="form-label">Episódios</label>
                     <input type="number" class="form-control mb-2" name="qtd_episodios">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col col-10">
+                    <label for="capaDaSerie" class="form-label">Capa</label>
+                    <input type="text" class="form-control mb-2" name="capaDaSerie" id="capaDaSerie">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Adicionar</button>

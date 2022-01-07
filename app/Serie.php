@@ -14,7 +14,7 @@ class Serie extends Model
     public $timestamps = false;
 
     //informa quais atributos podemos inserir através do comando Serie::create
-    protected $fillable = ['nome'];
+    protected $fillable = ['nome', 'capa'];
 
     //definindo relação entre a model Serie e a model Temporada
     public function temporadas()

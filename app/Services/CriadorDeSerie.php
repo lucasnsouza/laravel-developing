@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class CriadorDeSerie
 {
-    public function criarSerie(string $nomeDaSerie,int $qtdTempordas, int $qtdEpisodios): Serie
+    public function criarSerie(string $nomeDaSerie,int $qtdTempordas, int $qtdEpisodios, ?string $capaDaSerie): Serie
     {
         //pega os dados passados no input nomeDoSerie
         //$nome = $request->get('nomeDaSerie');
@@ -19,7 +19,10 @@ class CriadorDeSerie
         //inicia transação
         DB::beginTransaction();
             //método final
-            $serie = Serie::create(['nome' => $nomeDaSerie]);
+            $serie = Serie::create([
+                'nome' => $nomeDaSerie,
+                'capa' => $capaDaSerie
+            ]);
             $this->criarTemporadas($serie, $qtdTempordas, $qtdEpisodios);
         //envia o código de transação para o banco
         DB::commit();
