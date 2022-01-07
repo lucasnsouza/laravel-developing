@@ -12,7 +12,7 @@
 
 @include('erros', ['errors' => $errors])
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col col-md-6">
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col col-10">
                     <label for="capaDaSerie" class="form-label">Capa</label>
-                    <input type="text" class="form-control mb-2" name="capaDaSerie" id="capaDaSerie">
+                    <input type="file" class="form-control mb-2" name="capaDaSerie" id="capaDaSerie">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Adicionar</button>
