@@ -25,6 +25,6 @@ class TemporadasController extends Controller
         $serie = Serie::find($serieId);
         $nomeDaSerie = $serie->nome;
 
-        return view('temporadas/index', compact('numeroDeTemporadas', 'nomeDaSerie'));
+        return view('temporadas/index', compact('numeroDeTemporadas','serie', 'nomeDaSerie'));
     }
 }
