@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Temporada;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Serie extends Model
 {
@@ -21,5 +22,15 @@ class Serie extends Model
     {
         //uma série pode ter muitas temporadas
         return $this->hasMany(Temporada::class);
+    }
+
+    //usando mutator
+    public function getCapaUrlAttribute()
+    {
+        if($this->capa) {
+            $linkDaCapa = str_replace('public/', '/', $this->capa);
+        return Storage::url($linkDaCapa);
+        }
+        return Storage::url('serie/no-image.png');
     }
 }
