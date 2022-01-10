@@ -10,23 +10,19 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NovaSerie
+class SerieApagada
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public string $nome;
-    public string $qtd_temporadas;
-    public string $qtd_episodios;
+    public object $serie;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($nome, $qtd_temporadas, $qtd_episodios)
+    public function __construct(object $serie)
     {
-        $this->nome = $nome;
-        $this->qtd_temporadas = $qtd_temporadas;
-        $this->qtd_episodios = $qtd_episodios;
+        $this->serie = $serie;
     }
 
     /**
