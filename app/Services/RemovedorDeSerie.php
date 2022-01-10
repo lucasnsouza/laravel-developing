@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\SerieApagada;
+use App\Jobs\JobExcluirCapaSerie;
 use App\Models\Episodio;
 use App\Models\Temporada;
 use App\Serie;
@@ -39,6 +40,9 @@ class RemovedorDeSerie
             //emitindo evento
             //configurar provider associando evento e listener
             event($eventoApagaSerie);
+
+            //usando jobs
+            JobExcluirCapaSerie::dispatch($serieObj);
         });    
         return $nomeDaSerie;
     }
